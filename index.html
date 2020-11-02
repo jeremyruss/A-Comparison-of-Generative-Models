@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>Generative Models</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <div class="pane">
+                <div class="images">
+                    <h2 class="title">Variational Autoencoder</h2><br>
+                    <img src="./img/cvae.gif"><br><br>
+                    <h2 class="title">Generative Adversarial Network</h2><br>
+                    <img src="./img/dcgan.gif"><br>
+                </div>
+            </div>
+        </div>
+        <div id="description">
+            <h1>A Comparison Between Two Generative Models</h1>
+            <div id="first">
+                <img src="./img/examples.png">
+                <p>After working on a few machine learning related projects, I wanted to begin to experiment with what are known as
+                generative models, ones that instead of performing classification or regression; generate new data. TensorFlow has a few
+                tutorials on different types of generative models, two of which, generative adversarial networks and variational
+                autoencoders, are quite well known and I knew I wanted to work with them in some capacity. I thought about how I could
+                apply them to get some interesting results, rather than just follow the cookie cutter tutorials working with the MNIST
+                dataset. Generative adversarial networks, also known as GANs, are notorious for their application to the task of
+                generating faces (also known as deep fakes), and while the results could be impressive, the results would be
+                uninteresting. The same also applies to variational autoencoders, also known as VAEs.</p><br>
+                <p>The data I used to test these two networks had to have three requirements: the data had to be somewhat relevant and
+                interesting to me. It had to be fairly low resolution to be efficiently trainable on my PC with only 2GB of VRAM. And
+                finally, the data had to be well balanced, uniform and fairly well accessible. At this point it is relevant to note that
+                for a number of years of my life I have played a game called RuneScape. In this game there exists a myriad of items you
+                can possess, most notably different weapons and armour, and because this game is almost 20 years old, the graphics for
+                these items are pretty low resolution (specifically 36x32px). There also exists an API to access information on all the
+                items in the game, including B64 encoded image data. For these reasons, I decided to use this as my training data, a
+                subset of which can be seen in the image to the right.</p>
+            </div>
+            <div id="second">
+                <img src="./img/output.png">
+                <p>Autoencoders consist of an encoder and a decoder network, the encoder learns to encode the input feature space into what
+                is known as a latent vector; in the case of variational autoencoders, this latent vector is a probability
+                distribution, and the decoder learns to map this latent vector to an output. VAEs are well known for producing blurry
+                results, but are relatively fast to train. Generative adversarial networks use two networks, a generator and a
+                discriminator. The generator takes an input (random noise) and upsamples this seed to produce a tensor of a specific
+                shape, in this case the dimensions of our image (width by height by colour channels). The discriminator is trained to
+                classify whether the images produced by the generator are real or fake. This method of training is known as minimax
+                in game theory, because the discriminator is trying to minimise its own loss, and at the same time, the generator is
+                trying to maximise the discriminators loss.</p><br>
+                <p>I trained both networks for 12 hours exactly on the same input data, and the results are visualised in the pane on the
+                left. The VAE performed fairly well in generating shapes, but for some unknown reason the individual colour channels did
+                not diverge enough to produce any variation there. The GAN on the other hand did produce interesting colour images,
+                however, it chose to stick to generating images of platelegs, which may indicate the dataset is unbalanced and
+                non-uniform, or that particular shape is the easiest to fool the discriminator on because of its simplicity. The GAN
+                also seemed to produce images which were lacking in contrast, therefore to better visualise the results I corrected the
+                gamma in Photoshop for this specific image. I think that overall the results were pretty good considering some of the
+                minor challenges with the training data (relatively small dataset of around 2,000 semi-uniform items) and the hardware
+                limitations. If I were to do this again I would adjust the hyperparameters, including the batch size, and test these
+                networks with a larger and more uniform dataset.</p><br>
+                <div id="references">
+                    <a href="https://www.tensorflow.org/tutorials/generative/cvae">TensorFlow CVAE</a>
+                    <a href="https://www.tensorflow.org/tutorials/generative/dcgan">TensorFlow DCGAN</a>
+                    <a href="https://www.osrsbox.com/projects/osrsbox-db/">OSRSBox Database API</a>
+                    <a href="https://www.youtube.com/watch?v=XK7T3mY1V-w">JavaScript 3D Animation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="script.js" type="text/javascript"></script>
+
+</html>
